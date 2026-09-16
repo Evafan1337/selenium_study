@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEasy — Home</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Шапка повторяется на всех страницах. common.js обновляет auth-link и cart-count. -->
+  <header class="site-header">
+    <div class="nav-bar">
+      <a class="brand" href="index.html" id="brand-link">ShopEasy</a>
+      <nav class="nav-links">
+        <a href="index.html" data-testid="nav-home">Home</a>
+        <a href="catalog.html" data-testid="nav-catalog">Catalog</a>
+        <a href="cart.html" class="cart-link" data-testid="nav-cart">Cart <span class="cart-badge" id="cart-count">0</span></a>
+        <a href="dashboard.html" data-testid="nav-dashboard">My Account</a>
+        <a href="playground.html" data-testid="nav-playground">Playground</a>
+        <a href="login.html" id="auth-link" data-testid="nav-auth">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Основное содержимое. -->
+  <main class="container">
+    <h1 class="page-title">Welcome to ShopEasy</h1>
+    <p class="page-subtitle">A tiny electronics store built for practicing Selenium &amp; Pytest automation.</p>
+
+    <!-- Поиск фильтрует карточки #featured-grid на стороне клиента. -->
+    <div class="form-group" style="max-width:360px;">
+      <label for="search-input">Search products</label>
+      <input type="text" id="search-input" data-testid="search-input" placeholder="e.g. headphones">
+    </div>
+
+    <h2>Featured products</h2>
+    <div class="product-grid" id="featured-grid" data-testid="product-grid">
+      <!-- home.js строит карточки из общего списка PRODUCTS. -->
+    </div>
+
+    <p id="no-results-msg" class="hidden" data-testid="no-results-msg">No products match your search.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>ShopEasy demo &mdash; static site for Selenium/Pytest training. No real backend, no real payments.</p>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

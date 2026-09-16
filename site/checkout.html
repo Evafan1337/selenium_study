@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEasy — Checkout</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-bar">
+      <a class="brand" href="index.html">ShopEasy</a>
+      <nav class="nav-links">
+        <a href="index.html" data-testid="nav-home">Home</a>
+        <a href="catalog.html" data-testid="nav-catalog">Catalog</a>
+        <a href="cart.html" class="cart-link" data-testid="nav-cart">Cart <span class="cart-badge" id="cart-count">0</span></a>
+        <a href="dashboard.html" data-testid="nav-dashboard">My Account</a>
+        <a href="playground.html" data-testid="nav-playground">Playground</a>
+        <a href="login.html" id="auth-link" data-testid="nav-auth">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="max-width:600px;">
+    <h1 class="page-title">Checkout</h1>
+
+    <div class="steps" data-testid="checkout-steps">
+      <div class="step active" id="step-indicator-1" data-testid="step-indicator-1">1. Shipping</div>
+      <div class="step" id="step-indicator-2" data-testid="step-indicator-2">2. Payment</div>
+      <div class="step" id="step-indicator-3" data-testid="step-indicator-3">3. Review</div>
+    </div>
+
+    <div id="cart-empty-warning" class="alert alert-error" data-testid="checkout-empty-warning">
+      Your cart is empty. <a href="catalog.html">Go shopping</a> before checking out.
+    </div>
+
+    <div id="checkout-flow">
+      <!-- Шаг 1: доставка. -->
+      <section class="step-panel active" id="step-1" data-testid="step-panel-1">
+        <div class="form-group">
+          <label for="full-name">Full name</label>
+          <input type="text" id="full-name" data-testid="full-name" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" data-testid="address" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" data-testid="city" required>
+          </div>
+          <div class="form-group">
+            <label for="zip">ZIP code</label>
+            <input type="text" id="zip" data-testid="zip" required>
+          </div>
+        </div>
+        <button id="to-step-2" data-testid="to-step-2-btn">Continue to payment</button>
+      </section>
+
+      <!-- Шаг 2: оплата. -->
+      <section class="step-panel" id="step-2" data-testid="step-panel-2">
+        <div class="form-group">
+          <label>Payment method</label>
+          <label style="display:flex; align-items:center; gap:6px; font-weight:normal; margin-bottom:8px;">
+            <input type="radio" name="payment" value="card" data-testid="payment-card" style="width:auto;" checked> Credit card
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; font-weight:normal; margin-bottom:8px;">
+            <input type="radio" name="payment" value="paypal" data-testid="payment-paypal" style="width:auto;"> PayPal
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; font-weight:normal;">
+            <input type="radio" name="payment" value="cash" data-testid="payment-cash" style="width:auto;"> Cash on delivery
+          </label>
+        </div>
+
+        <div id="card-fields" data-testid="card-fields">
+          <div class="form-group">
+            <label for="card-number">Card number</label>
+            <input type="text" id="card-number" data-testid="card-number" placeholder="4111 1111 1111 1111">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="card-expiry">Expiry</label>
+              <input type="text" id="card-expiry" data-testid="card-expiry" placeholder="MM/YY">
+            </div>
+            <div class="form-group">
+              <label for="card-cvv">CVV</label>
+              <input type="text" id="card-cvv" data-testid="card-cvv" placeholder="123">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-secondary" id="to-step-1" data-testid="back-to-step-1-btn">Back</button>
+        <button id="to-step-3" data-testid="to-step-3-btn">Review order</button>
+      </section>
+
+      <!-- Шаг 3: проверка и подтверждение. -->
+      <section class="step-panel" id="step-3" data-testid="step-panel-3">
+        <div class="card" style="margin-bottom:16px;">
+          <p><strong>Ship to:</strong> <span id="review-name" data-testid="review-name"></span>, <span id="review-address" data-testid="review-address"></span></p>
+          <p><strong>Payment:</strong> <span id="review-payment" data-testid="review-payment"></span></p>
+          <p><strong>Order total:</strong> <span id="review-total" data-testid="review-total"></span></p>
+        </div>
+        <button class="btn-secondary" id="to-step-2-back" data-testid="back-to-step-2-btn">Back</button>
+        <button id="place-order-btn" data-testid="place-order-btn">Place order</button>
+      </section>
+
+      <!-- Подтверждение. -->
+      <section class="step-panel" id="step-confirmation" data-testid="step-confirmation">
+        <div class="alert alert-success visible">
+          <p>Thank you! Your order <strong id="order-number" data-testid="order-number"></strong> has been placed.</p>
+        </div>
+        <a class="btn" href="index.html" data-testid="back-to-home-btn">Back to home</a>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ShopEasy demo &mdash; static site for Selenium/Pytest training. No real backend, no real payments.</p>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/checkout.js"></script>
+</body>
+</html>

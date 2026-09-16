@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEasy — Catalog</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-bar">
+      <a class="brand" href="index.html">ShopEasy</a>
+      <nav class="nav-links">
+        <a href="index.html" data-testid="nav-home">Home</a>
+        <a href="catalog.html" data-testid="nav-catalog">Catalog</a>
+        <a href="cart.html" class="cart-link" data-testid="nav-cart">Cart <span class="cart-badge" id="cart-count">0</span></a>
+        <a href="dashboard.html" data-testid="nav-dashboard">My Account</a>
+        <a href="playground.html" data-testid="nav-playground">Playground</a>
+        <a href="login.html" id="auth-link" data-testid="nav-auth">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Catalog</h1>
+    <p class="page-subtitle">Filter and sort the full product list. Re-renders the grid via JS on every change &mdash; good for practicing waits on dynamic content.</p>
+
+    <div class="filters-bar">
+      <div class="form-group">
+        <label for="category-filter">Category</label>
+        <select id="category-filter" data-testid="category-filter">
+          <option value="all">All categories</option>
+          <option value="audio">Audio</option>
+          <option value="accessories">Accessories</option>
+          <option value="displays">Displays</option>
+          <option value="wearables">Wearables</option>
+          <option value="storage">Storage</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="max-price">Max price: $<span id="max-price-value">400</span></label>
+        <input type="range" id="max-price" data-testid="max-price-range" min="0" max="400" step="10" value="400">
+      </div>
+      <div class="form-group">
+        <label for="sort-select">Sort by</label>
+        <select id="sort-select" data-testid="sort-select">
+          <option value="default">Featured</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="name-asc">Name: A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <p><span id="result-count" data-testid="result-count">6</span> products found</p>
+
+    <div class="product-grid" id="catalog-grid" data-testid="product-grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ShopEasy demo &mdash; static site for Selenium/Pytest training. No real backend, no real payments.</p>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/catalog.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEasy — Product</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-bar">
+      <a class="brand" href="index.html">ShopEasy</a>
+      <nav class="nav-links">
+        <a href="index.html" data-testid="nav-home">Home</a>
+        <a href="catalog.html" data-testid="nav-catalog">Catalog</a>
+        <a href="cart.html" class="cart-link" data-testid="nav-cart">Cart <span class="cart-badge" id="cart-count">0</span></a>
+        <a href="dashboard.html" data-testid="nav-dashboard">My Account</a>
+        <a href="playground.html" data-testid="nav-playground">Playground</a>
+        <a href="login.html" id="auth-link" data-testid="nav-auth">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="product-not-found" class="hidden" data-testid="product-not-found">
+      <p>Product not found. <a href="catalog.html">Back to catalog</a></p>
+    </div>
+
+    <div id="product-detail" data-testid="product-detail">
+      <div style="display:flex; gap:24px; flex-wrap:wrap;">
+        <div class="thumb" id="product-thumb" style="width:220px; height:220px; font-size:72px;"></div>
+        <div style="flex:1; min-width:260px;">
+          <h1 class="page-title" id="product-name" data-testid="product-name"></h1>
+          <p class="price" id="product-price" data-testid="product-price" style="font-size:22px;"></p>
+
+          <div class="form-group" style="max-width:160px;">
+            <label for="quantity-select">Quantity</label>
+            <select id="quantity-select" data-testid="quantity-select">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <button id="add-to-cart-btn" data-testid="add-to-cart-btn">Add to cart</button>
+          <p class="alert alert-success" id="added-msg" data-testid="added-to-cart-msg" style="display:none; margin-top:12px;">Added to cart!</p>
+        </div>
+      </div>
+
+      <div class="tabs" data-testid="product-tabs">
+        <button class="tab-btn active" data-tab="description" data-testid="tab-description">Description</button>
+        <button class="tab-btn" data-tab="specs" data-testid="tab-specs">Specifications</button>
+        <button class="tab-btn" data-tab="reviews" data-testid="tab-reviews">Reviews</button>
+      </div>
+      <div class="tab-panel active" id="panel-description" data-testid="panel-description">
+        <p id="product-description"></p>
+      </div>
+      <div class="tab-panel" id="panel-specs" data-testid="panel-specs">
+        <ul id="product-specs"></ul>
+      </div>
+      <div class="tab-panel" id="panel-reviews" data-testid="panel-reviews">
+        <p>"Works great, exactly as described." &mdash; verified buyer</p>
+        <p>"Good value for the price." &mdash; verified buyer</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ShopEasy demo &mdash; static site for Selenium/Pytest training. No real backend, no real payments.</p>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/product.js"></script>
+</body>
+</html>

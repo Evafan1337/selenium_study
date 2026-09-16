@@ -1,0 +1,2 @@
+This is a sample file used by 09_file_upload.py to demonstrate
+Selenium file uploads via <input type="file">.send_keys(path).

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEasy — Cart</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-bar">
+      <a class="brand" href="index.html">ShopEasy</a>
+      <nav class="nav-links">
+        <a href="index.html" data-testid="nav-home">Home</a>
+        <a href="catalog.html" data-testid="nav-catalog">Catalog</a>
+        <a href="cart.html" class="cart-link" data-testid="nav-cart">Cart <span class="cart-badge" id="cart-count">0</span></a>
+        <a href="dashboard.html" data-testid="nav-dashboard">My Account</a>
+        <a href="playground.html" data-testid="nav-playground">Playground</a>
+        <a href="login.html" id="auth-link" data-testid="nav-auth">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Your cart</h1>
+
+    <p id="empty-cart-msg" class="hidden" data-testid="empty-cart-msg">Your cart is empty. <a href="catalog.html">Go shopping</a>.</p>
+
+    <table class="data-table hidden" id="cart-table" data-testid="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="cart-body"></tbody>
+    </table>
+
+    <div id="cart-summary" class="hidden" style="margin-top:20px; max-width:300px;">
+      <div class="card">
+        <p>Total: <strong id="cart-total" data-testid="cart-total">$0.00</strong></p>
+        <button id="checkout-btn" data-testid="checkout-btn">Proceed to checkout</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ShopEasy demo &mdash; static site for Selenium/Pytest training. No real backend, no real payments.</p>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/cart.js"></script>
+</body>
+</html>

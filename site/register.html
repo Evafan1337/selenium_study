@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEasy — Register</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-bar">
+      <a class="brand" href="index.html">ShopEasy</a>
+      <nav class="nav-links">
+        <a href="index.html" data-testid="nav-home">Home</a>
+        <a href="catalog.html" data-testid="nav-catalog">Catalog</a>
+        <a href="cart.html" class="cart-link" data-testid="nav-cart">Cart <span class="cart-badge" id="cart-count">0</span></a>
+        <a href="dashboard.html" data-testid="nav-dashboard">My Account</a>
+        <a href="playground.html" data-testid="nav-playground">Playground</a>
+        <a href="login.html" id="auth-link" data-testid="nav-auth">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="max-width:560px;">
+    <h1 class="page-title">Create an account</h1>
+
+    <div class="alert alert-success" id="register-success" data-testid="register-success">
+      Account created! Redirecting to login&hellip;
+    </div>
+
+    <form id="register-form" data-testid="register-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First name</label>
+          <input type="text" id="first-name" data-testid="first-name" required>
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last name</label>
+          <input type="text" id="last-name" data-testid="last-name" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-email">Email</label>
+        <input type="email" id="reg-email" data-testid="reg-email" required>
+        <div class="field-error" id="email-error" data-testid="email-error">Please enter a valid email address.</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" data-testid="reg-password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm password</label>
+          <input type="password" id="confirm-password" data-testid="confirm-password" required>
+          <div class="field-error" id="password-error" data-testid="password-error">Passwords do not match.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="birth-date">Date of birth</label>
+        <input type="date" id="birth-date" data-testid="birth-date">
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+        <label style="display:inline-flex; align-items:center; gap:6px; font-weight:normal; margin-right:16px;">
+          <input type="radio" name="gender" value="female" data-testid="gender-female" style="width:auto;"> Female
+        </label>
+        <label style="display:inline-flex; align-items:center; gap:6px; font-weight:normal; margin-right:16px;">
+          <input type="radio" name="gender" value="male" data-testid="gender-male" style="width:auto;"> Male
+        </label>
+        <label style="display:inline-flex; align-items:center; gap:6px; font-weight:normal;">
+          <input type="radio" name="gender" value="other" data-testid="gender-other" style="width:auto;"> Other
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select id="country" data-testid="country-select">
+          <option value="">Select a country&hellip;</option>
+          <option value="us">United States</option>
+          <option value="de">Germany</option>
+          <option value="ru">Russia</option>
+          <option value="in">India</option>
+          <option value="br">Brazil</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:6px; font-weight:normal;">
+          <input type="checkbox" id="newsletter" data-testid="newsletter-checkbox" style="width:auto;">
+          Subscribe to the newsletter
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:6px; font-weight:normal;">
+          <input type="checkbox" id="terms" data-testid="terms-checkbox" style="width:auto;" required>
+          I agree to the Terms of Service
+        </label>
+        <div class="field-error" id="terms-error" data-testid="terms-error">You must accept the terms to continue.</div>
+      </div>
+
+      <button type="submit" id="register-btn" data-testid="register-submit">Create account</button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <p>ShopEasy demo &mdash; static site for Selenium/Pytest training. No real backend, no real payments.</p>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Iframe content</title>
+  <style>
+    body { font-family: sans-serif; padding: 16px; background: #eef2fb; margin:0; }
+    input { padding: 6px; width: 90%; }
+  </style>
+</head>
+<body>
+  <p id="iframe-heading" data-testid="iframe-heading">I live inside an &lt;iframe&gt;</p>
+  <label for="iframe-input">Type here:</label>
+  <input type="text" id="iframe-input" data-testid="iframe-input">
+  <p>You typed: <span id="iframe-echo" data-testid="iframe-echo"></span></p>
+  <script>
+    document.getElementById("iframe-input").addEventListener("input", (e) => {
+      document.getElementById("iframe-echo").textContent = e.target.value;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEasy — My Account</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-bar">
+      <a class="brand" href="index.html">ShopEasy</a>
+      <nav class="nav-links">
+        <a href="index.html" data-testid="nav-home">Home</a>
+        <a href="catalog.html" data-testid="nav-catalog">Catalog</a>
+        <a href="cart.html" class="cart-link" data-testid="nav-cart">Cart <span class="cart-badge" id="cart-count">0</span></a>
+        <a href="dashboard.html" data-testid="nav-dashboard">My Account</a>
+        <a href="playground.html" data-testid="nav-playground">Playground</a>
+        <a href="login.html" id="auth-link" data-testid="nav-auth">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">My Account</h1>
+    <p class="page-subtitle" id="welcome-msg" data-testid="welcome-msg"></p>
+
+    <h2>Order history</h2>
+    <table class="data-table" data-testid="orders-table">
+      <thead>
+        <tr><th>Order #</th><th>Date</th><th>Status</th><th>Total</th></tr>
+      </thead>
+      <tbody id="orders-body" data-testid="orders-body">
+        <tr><td>SE-482913</td><td>2026-08-02</td><td>Delivered</td><td>$149.99</td></tr>
+        <tr><td>SE-311745</td><td>2026-07-19</td><td>Delivered</td><td>$89.00</td></tr>
+        <tr><td>SE-208834</td><td>2026-06-30</td><td>Cancelled</td><td>$34.50</td></tr>
+      </tbody>
+    </table>
+
+    <div class="widget-block" style="margin-top:24px;">
+      <h3>Danger zone</h3>
+      <p>Deleting your account cannot be undone (demo only — triggers a native confirm dialog).</p>
+      <button class="btn-danger" id="delete-account-btn" data-testid="delete-account-btn">Delete account</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ShopEasy demo &mdash; static site for Selenium/Pytest training. No real backend, no real payments.</p>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

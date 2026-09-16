@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEasy — Playground</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-bar">
+      <a class="brand" href="index.html">ShopEasy</a>
+      <nav class="nav-links">
+        <a href="index.html" data-testid="nav-home">Home</a>
+        <a href="catalog.html" data-testid="nav-catalog">Catalog</a>
+        <a href="cart.html" class="cart-link" data-testid="nav-cart">Cart <span class="cart-badge" id="cart-count">0</span></a>
+        <a href="dashboard.html" data-testid="nav-dashboard">My Account</a>
+        <a href="playground.html" data-testid="nav-playground">Playground</a>
+        <a href="login.html" id="auth-link" data-testid="nav-auth">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Elements playground</h1>
+    <p class="page-subtitle">A grab-bag of tricky UI elements, one per Selenium feature. Not part of the shop's business flow &mdash; used by <code>standalone_examples/</code> and <code>tests/test_playground.py</code>.</p>
+
+    <!-- 1. Диалоги. -->
+    <div class="widget-block" data-testid="widget-alerts">
+      <h3>JS dialogs</h3>
+      <button id="alert-btn" data-testid="alert-btn">Trigger alert()</button>
+      <button id="confirm-btn" data-testid="confirm-btn">Trigger confirm()</button>
+      <button id="prompt-btn" data-testid="prompt-btn">Trigger prompt()</button>
+      <p id="dialog-result" data-testid="dialog-result"></p>
+    </div>
+
+    <!-- 2. Iframe. -->
+    <div class="widget-block" data-testid="widget-iframe">
+      <h3>Iframe</h3>
+      <iframe id="content-frame" data-testid="content-frame" src="iframe_content.html" style="width:100%; height:120px; border:1px solid #cfd5e2; border-radius:8px;"></iframe>
+    </div>
+
+    <!-- 3. Перетаскивание. -->
+    <div class="widget-block" data-testid="widget-dragdrop">
+      <h3>Drag and drop</h3>
+      <div id="draggable" data-testid="draggable" draggable="true">Drag me</div>
+      <div id="dropzone" data-testid="dropzone">Drop here</div>
+    </div>
+
+    <!-- 4. Динамическая загрузка для явного ожидания. -->
+    <div class="widget-block" data-testid="widget-dynamic">
+      <h3>Dynamic loading</h3>
+      <button id="load-btn" data-testid="load-btn">Load data (2s delay)</button>
+      <p id="loading-spinner" class="hidden" data-testid="loading-spinner">Loading&hellip;</p>
+      <p id="loaded-content" class="hidden" data-testid="loaded-content">Here is your dynamically loaded content!</p>
+    </div>
+
+    <!-- 5. Подсказка при наведении. -->
+    <div class="widget-block" data-testid="widget-tooltip">
+      <h3>Hover tooltip</h3>
+      <span data-tooltip="I appear on hover" data-testid="tooltip-trigger">Hover over me</span>
+    </div>
+
+    <!-- 6. Новая вкладка и дескрипторы окон. -->
+    <div class="widget-block" data-testid="widget-newtab">
+      <h3>New tab</h3>
+      <a id="new-tab-link" data-testid="new-tab-link" href="new_tab.html" target="_blank">Open in new tab</a>
+    </div>
+
+    <!-- 7. Загрузка файла. -->
+    <div class="widget-block" data-testid="widget-upload">
+      <h3>File upload</h3>
+      <input type="file" id="file-input" data-testid="file-input">
+      <p id="file-name" data-testid="file-name"></p>
+    </div>
+
+    <!-- 8. Список с множественным выбором. -->
+    <div class="widget-block" data-testid="widget-multiselect">
+      <h3>Multi-select</h3>
+      <select id="multi-select" data-testid="multi-select" multiple size="4" style="width:220px;">
+        <option value="js">JavaScript</option>
+        <option value="py">Python</option>
+        <option value="java">Java</option>
+        <option value="go">Go</option>
+      </select>
+      <p id="multi-select-result" data-testid="multi-select-result"></p>
+    </div>
+
+    <!-- 9. Сортируемая таблица. -->
+    <div class="widget-block" data-testid="widget-table">
+      <h3>Sortable table</h3>
+      <table class="data-table" id="sortable-table" data-testid="sortable-table">
+        <thead>
+          <tr>
+            <th data-testid="sort-by-name">Name</th>
+            <th data-testid="sort-by-age">Age</th>
+          </tr>
+        </thead>
+        <tbody id="sortable-table-body">
+          <tr><td>Charlie</td><td>35</td></tr>
+          <tr><td>Alice</td><td>28</td></tr>
+          <tr><td>Bob</td><td>42</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 10. Ползунок диапазона. -->
+    <div class="widget-block" data-testid="widget-slider">
+      <h3>Range slider</h3>
+      <input type="range" id="volume-slider" data-testid="volume-slider" min="0" max="100" value="50">
+      <span id="volume-value" data-testid="volume-value">50</span>
+    </div>
+
+    <!-- 11. Включение и отключение элемента. -->
+    <div class="widget-block" data-testid="widget-toggle">
+      <h3>Enable/disable button</h3>
+      <label style="display:flex; align-items:center; gap:6px; font-weight:normal;">
+        <input type="checkbox" id="enable-checkbox" data-testid="enable-checkbox" style="width:auto;">
+        Enable the button below
+      </label>
+      <button id="toggle-target-btn" data-testid="toggle-target-btn" disabled>I was disabled</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ShopEasy demo &mdash; static site for Selenium/Pytest training. No real backend, no real payments.</p>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/playground.js"></script>
+</body>
+</html>
