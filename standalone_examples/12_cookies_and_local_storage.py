@@ -6,15 +6,22 @@
 """
 
 import json
+import time
 
-from _helpers import new_driver, show_element
+from _helpers import DEMO_DELAY, new_driver, show_element
 from framework.utils.local_server import LocalSiteServer
+
+# пауза между действиями. Сами cookie и localStorage не видны на экране —
+# пауза здесь просто даёт время увидеть страницу "до", прежде чем через JS
+# незаметно подготовим авторизацию и перейдём в личный кабинет
+SLEEP = DEMO_DELAY
 
 # поднимаем локальный сервер для site/ — cookie требуют настоящего http://-адреса
 server = LocalSiteServer().start()
 # создаём драйвер
 driver = new_driver()
 driver.get(server.url("index.html"))
+time.sleep(SLEEP)
 
 # ---------- Cookies: нативный API WebDriver ----------
 driver.add_cookie({"name": "demo_cookie", "value": "abc123"})

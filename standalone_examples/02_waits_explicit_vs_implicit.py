@@ -12,7 +12,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from _helpers import new_driver, show_element, site_url
+from _helpers import DEMO_DELAY, new_driver, show_element, site_url
+
+# сколько секунд ждать между шагами, чтобы успеть увидеть браузер, а не
+# просто прочитать вывод в консоли. Меняется через переменную окружения:
+# DEMO_DELAY=2 python standalone_examples/02_waits_explicit_vs_implicit.py
+SLEEP = DEMO_DELAY
 
 # локаторы понадобятся во всех трёх попытках — создаём их один раз
 LOAD_BTN = (By.ID, "load-btn")
@@ -32,6 +37,8 @@ driver.find_element(*LOAD_BTN).click()
 # сразу же, без паузы, ищем элемент, который появляется с задержкой
 element = driver.find_element(*LOADED_CONTENT)
 print("Attempt 1 (no wait): present in DOM, displayed =", element.is_displayed())
+# пауза, чтобы успеть увидеть состояние страницы, прежде чем браузер закроется
+time.sleep(SLEEP)
 # закрываем браузер первой попытки
 driver.quit()
 
@@ -47,6 +54,7 @@ driver.get(site_url("playground.html"))
 driver.find_element(*LOAD_BTN).click()
 element = driver.find_element(*LOADED_CONTENT)
 print("Attempt 2 (1s implicit wait): returned immediately, displayed =", element.is_displayed())
+time.sleep(SLEEP)
 driver.quit()
 
 # ==================== Попытка 3: explicit wait ====================
@@ -68,5 +76,7 @@ try:
 except TimeoutException:
     print("Attempt 3 (explicit wait): unexpectedly timed out")
 
+# ещё одна пауза перед закрытием — чтобы увидеть финальное состояние страницы
+time.sleep(SLEEP)
 # закрываем браузер третьей попытки
 driver.quit()

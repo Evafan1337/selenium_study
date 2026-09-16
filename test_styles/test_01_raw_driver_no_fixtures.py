@@ -1,70 +1,86 @@
 """
-01 — Обычный driver, БЕЗ фикстур.
+01 — Обычный driver, БЕЗ фикстур, БЕЗ хелперов проекта.
 
-Один и тот же сценарий логина проверяется в четырёх файлах этой папки —
-меняется только то, КАК устроен тест, а не то, ЧТО он проверяет. Здесь —
-самый примитивный вариант: каждый тест сам поднимает сервер и браузер,
-сам всё закрывает и сам ищет элементы напрямую через By.*.
+Максимально простой файл для демки: только selenium + pytest, ничего из
+framework/. Браузер — видимый Chrome (headless нигде не включается), между
+действиями пауза в SLEEP_SECONDS, чтобы успеть увидеть каждый шаг глазами.
 
-Специально не убираем повторяющийся код между двумя тестами — он тут,
-чтобы на следующем файле (02) было видно, что именно решают фикстуры.
+Запуск:
+    pytest test_styles/test_01_raw_driver_no_fixtures.py -v -s
 """
 
+import time                         # модуль дающий функцию для ожидания
+from pathlib import Path            # открытие html-верстки
+                                    # (опционально)
+
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-from framework.utils.driver_factory import build_driver
-from framework.utils.local_server import LocalSiteServer
+# сколько секунд ждать после каждого действия — просто число, без env-переменных
+SLEEP_SECONDS = 1
 
+# страница логина открывается прямо с диска (file://...), без локального сервера
+LOGIN_PAGE = (Path(__file__).resolve().parent.parent / "site" / "login.html").as_uri()
+
+print(LOGIN_PAGE)
 
 def test_successful_login():
-    # поднимаем сервер сайта вручную — отдельно для каждого теста
-    server = LocalSiteServer().start()
-    # создаём драйвер вручную — тоже отдельно для каждого теста
-    driver = build_driver()
+    # создаём драйвер — обычный видимый Chrome, без каких-либо опций
+    driver = webdriver.Chrome()
 
-    # открываем страницу логина по адресу локального сервера
-    driver.get(server.url("login.html"))
+    # открываем страницу логина
+    driver.get(LOGIN_PAGE)
+    time.sleep(SLEEP_SECONDS)
 
     # создаём локаторы и находим по ним поля формы
+    # сохраняем их в переменную
     email_field = driver.find_element(By.ID, "email")
     password_field = driver.find_element(By.ID, "password")
     submit_button = driver.find_element(By.ID, "login-btn")
 
-    # заполняем форму и отправляем её
+    # заполняем форму — с паузой после каждого поля, чтобы видеть ввод
     email_field.send_keys("test@example.com")
+    time.sleep(SLEEP_SECONDS)
     password_field.send_keys("Password123")
+    time.sleep(SLEEP_SECONDS)
+
+    # отправляем форму
     submit_button.click()
+    time.sleep(SLEEP_SECONDS)
 
     # после успешного логина сайт сам переходит на dashboard.html
     welcome_message = driver.find_element(By.ID, "welcome-msg")
     assert "Test User" in welcome_message.text
+    time.sleep(SLEEP_SECONDS)
 
-    # закрываем браузер и сервер вручную.
-    # ВАЖНО: если бы assert выше упал, обе строки ниже НЕ выполнились бы —
-    # браузер и сервер остались бы висеть в фоне. Это и есть главная причина,
-    # по которой в файле 02 эта же уборка переезжает в fixture с yield.
+    # закрываем браузер вручную.
+    # ВАЖНО: если бы assert выше упал, эта строка НЕ выполнилась бы —
+    # браузер остался бы висеть в фоне. Это и есть главная причина, по
+    # которой в файле 02 закрытие переезжает в fixture с yield.
     driver.quit()
-    server.stop()
 
 
 def test_invalid_login_shows_error():
     # тот же самый код поднятия окружения — скопирован один в один из теста выше
-    server = LocalSiteServer().start()
-    driver = build_driver()
+    driver = webdriver.Chrome()
 
-    driver.get(server.url("login.html"))
+    driver.get(LOGIN_PAGE)
+    time.sleep(SLEEP_SECONDS)
 
     email_field = driver.find_element(By.ID, "email")
     password_field = driver.find_element(By.ID, "password")
     submit_button = driver.find_element(By.ID, "login-btn")
 
     email_field.send_keys("wrong@example.com")
+    time.sleep(SLEEP_SECONDS)
     password_field.send_keys("wrongpass")
+    time.sleep(SLEEP_SECONDS)
     submit_button.click()
+    time.sleep(SLEEP_SECONDS)
 
     # при неверных данных сайт остаётся на той же странице и показывает блок ошибки
     error_box = driver.find_element(By.ID, "login-error")
     assert "email or password" in error_box.text.lower()
+    time.sleep(SLEEP_SECONDS)
 
     driver.quit()
-    server.stop()

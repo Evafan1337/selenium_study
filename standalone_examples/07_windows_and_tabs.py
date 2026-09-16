@@ -5,9 +5,15 @@
 пока мы явно не переключим контекст.
 """
 
+import time
+
 from selenium.webdriver.common.by import By
 
-from _helpers import new_driver, site_url
+from _helpers import DEMO_DELAY, new_driver, site_url
+
+# пауза между действиями — переключение вкладок в браузере происходит
+# мгновенно, без паузы вы просто не успеете заметить, что вкладок стало две
+SLEEP = DEMO_DELAY
 
 # создаём драйвер
 driver = new_driver()
@@ -20,6 +26,8 @@ print("Handles before click:", len(original_handles))
 # создаём локатор ссылки, которая откроет новую вкладку (target="_blank")
 new_tab_link_locator = (By.ID, "new-tab-link")
 driver.find_element(*new_tab_link_locator).click()
+# пауза, чтобы увидеть в браузере, что открылась вторая вкладка
+time.sleep(SLEEP)
 
 # у Selenium нет события "открылась новая вкладка" — сравниваем хендлы до и после
 new_handle = (set(driver.window_handles) - original_handles).pop()
@@ -32,6 +40,8 @@ print("Title before switching:", driver.title)
 driver.switch_to.window(new_handle)
 print("Title after switching:", driver.title)
 print("URL after switching:", driver.current_url)
+# пауза, чтобы увидеть содержимое именно новой вкладки, прежде чем её закроем
+time.sleep(SLEEP)
 
 # закрываем только новую вкладку — исходная остаётся открытой
 driver.close()
